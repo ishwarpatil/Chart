@@ -1,0 +1,168 @@
+<html>
+<head>
+
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <script src="https://code.highcharts.com/stock/highstock.js"></script>
+    <script src="https://code.highcharts.com/stock/modules/drag-panes.js"></script>
+    <script src="https://code.highcharts.com/stock/modules/exporting.js"></script>
+
+    <script>
+
+      var a1 = [];
+      $.getJSON('event.json', (dataMain) => {
+        $.each(dataMain, (k, v) => {
+          var event_date_timestamp = v.event_date_timestamp;
+          a1.push(event_date_timestamp);
+        });
+      });
+
+      var html = [];
+      var urlSybmol = 'http://data.accrue.com/api/data/symbols?auth-token=Sy1zihufJ2cOeLMSKrkKsvZF_QRjS4XWG2rg4dO7veM&q=micro';
+      $.getJSON(urlSybmol, (data) => {
+        $.each(data, (k, v) => {
+          var symbol = v.symbol;
+          var description = v.description;
+          //availableTags.push(symbol);
+          html += "<option value=" + symbol + ">" + description + "</option>";
+        });
+        document.getElementById('symbol-list').innerHTML += html;
+      });
+
+      let get = () => {
+        var symbol = document.getElementById("tags").value;
+        var url = 'http://db.accrue.com/api/data/history?auth-token=Sy1zihufJ2cOeLMSKrkKsvZF_QRjS4XWG2rg4dO7veM&symbol=' + symbol + '&type=daily';
+        $.getJSON(url, (data) => {
+
+          // split the data set into ohlc and volume
+          var ohlc = [];
+          var volume = [];
+
+          // set the allowed units for data grouping
+          groupingUnits = [[
+            'week',                         // unit name
+            [1]                             // allowed multiples
+          ], [
+            'month',
+            [1, 2, 3, 4, 6]
+          ]],
+            $.each(data.data, (k, v) => {
+              var date = v.time;
+              var open = v.open;
+              var high = v.high;
+              var low = v.low;
+              var close = v.close;
+              var volumes = v.volume;
+              for(let x of a1)
+              {
+                    if(x == date)
+                    {
+                      ohlc.push([
+                        date, // the date
+                        open, // open
+                        high, // high
+                        low, // low
+                        close // close
+                      ]);
+
+                      volume.push([
+                        date, // the date
+                        volumes, // the volume
+                      ]);
+                    }
+              }
+            });
+          // create the chart
+          Highcharts.stockChart('container1', {
+
+            rangeSelector: {
+              selected: 1
+            },
+
+            title: {
+              text: symbol + ' Historical'
+            },
+
+            yAxis: [{
+              //Set OHLC
+              labels: {
+                align: 'right',
+                x: -3
+              },
+              title: {
+                text: 'OHLC'
+              },
+              height: '60%',
+              lineWidth: 2,
+              resize: {
+                enabled: true
+              }
+            }, {
+              //Set Volume
+              labels: {
+                align: 'right',
+                x: -3
+              },
+              title: {
+                text: 'Volume'
+              },
+              top: '65%',
+              height: '35%',
+              offset: 0,
+              lineWidth: 2
+            }],
+
+            tooltip: {
+              split: true
+            },
+
+            series: [{
+              type: 'candlestick',
+              name: symbol,
+              //color: '#0066FF',
+              data: ohlc,
+              dataGrouping: {
+                units: groupingUnits
+              }
+            }, {
+              type: 'column',
+              name: 'Volume',
+              //color: '#FF0000',
+              data: volume,
+              yAxis: 1,
+              dataGrouping: {
+                units: groupingUnits
+              }
+            }]
+          });
+        });
+      }
+
+    </script>
+
+</head>
+<div class="col-md-2">
+    <div class="form-group">
+        <label for="symbol" class="control-label">Symbol 1</label>
+        <input type="text" id="tags" placeholder="" list="symbol-list" id="symbol" class="form-control">
+        <label class="message-label"></label>
+        <datalist id="symbol-list">
+        </datalist>
+    </div>
+    <button class="btn-info" onclick="get()">Analyze</button>
+</div>
+<br>
+<br>
+<div id="container1" style="height: 400px; min-width: 310px"></div>
+</body>
+</html>

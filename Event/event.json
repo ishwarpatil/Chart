@@ -1,0 +1,172 @@
+[{
+  "event_date_id": 667,
+  "event_date_timestamp": "1984-09-07T04:00:00Z",
+  "event_date_text": "11/22/2018",
+  "event_date_description": "Thanksgiving Day - Federal Holiday",
+  "event_id": 9,
+  "fixed": true,
+  "event_date_source": null,
+  "event_time_text": null
+}, {
+  "event_date_id": 666,
+  "event_date_timestamp": "1984-09-10T04:00:00Z",
+  "event_date_text": "11/23/2017",
+  "event_date_description": "Thanksgiving Day - Federal Holiday",
+  "event_id": 9,
+  "fixed": true,
+  "event_date_source": null,
+  "event_time_text": null
+}, {
+  "event_date_id": 665,
+  "event_date_timestamp": "1984-09-11T04:00:00Z",
+  "event_date_text": "11/24/2016",
+  "event_date_description": "Thanksgiving Day - Federal Holiday",
+  "event_id": 9,
+  "fixed": true,
+  "event_date_source": null,
+  "event_time_text": null
+}, {
+  "event_date_id": 664,
+  "event_date_timestamp": "2015-11-26T00:00:00Z",
+  "event_date_text": "11/26/2015",
+  "event_date_description": "Thanksgiving Day - Federal Holiday",
+  "event_id": 9,
+  "fixed": true,
+  "event_date_source": null,
+  "event_time_text": null
+}, {
+  "event_date_id": 663,
+  "event_date_timestamp": "2014-11-27T00:00:00Z",
+  "event_date_text": "11/27/2014",
+  "event_date_description": "Thanksgiving Day - Federal Holiday",
+  "event_id": 9,
+  "fixed": true,
+  "event_date_source": null,
+  "event_time_text": null
+}, {
+  "event_date_id": 661,
+  "event_date_timestamp": "2013-11-28T00:00:00Z",
+  "event_date_text": "11/28/2013",
+  "event_date_description": "Thanksgiving Day - Federal Holiday",
+  "event_id": 9,
+  "fixed": true,
+  "event_date_source": null,
+  "event_time_text": null
+}, {
+  "event_date_id": 662,
+  "event_date_timestamp": "2012-11-22T00:00:00Z",
+  "event_date_text": "11/22/2012",
+  "event_date_description": "Thanksgiving Day - Federal Holiday",
+  "event_id": 9,
+  "fixed": true,
+  "event_date_source": null,
+  "event_time_text": null
+}, {
+  "event_date_id": 660,
+  "event_date_timestamp": "2011-11-24T00:00:00Z",
+  "event_date_text": "11/24/2011",
+  "event_date_description": "Thanksgiving Day - Federal Holiday",
+  "event_id": 9,
+  "fixed": true,
+  "event_date_source": null,
+  "event_time_text": null
+}, {
+  "event_date_id": 659,
+  "event_date_timestamp": "2010-11-25T00:00:00Z",
+  "event_date_text": "11/25/2010",
+  "event_date_description": "Thanksgiving Day - Federal Holiday",
+  "event_id": 9,
+  "fixed": true,
+  "event_date_source": null,
+  "event_time_text": null
+}, {
+  "event_date_id": 658,
+  "event_date_timestamp": "2009-11-26T00:00:00Z",
+  "event_date_text": "11/26/2009",
+  "event_date_description": "Thanksgiving Day - Federal Holiday",
+  "event_id": 9,
+  "fixed": true,
+  "event_date_source": null,
+  "event_time_text": null
+}, {
+  "event_date_id": 657,
+  "event_date_timestamp": "2008-11-27T00:00:00Z",
+  "event_date_text": "11/27/2008",
+  "event_date_description": "Thanksgiving Day - Federal Holiday",
+  "event_id": 9,
+  "fixed": true,
+  "event_date_source": null,
+  "event_time_text": null
+}, {
+  "event_date_id": 656,
+  "event_date_timestamp": "2007-11-22T00:00:00Z",
+  "event_date_text": "11/22/2007",
+  "event_date_description": "Thanksgiving Day - Federal Holiday",
+  "event_id": 9,
+  "fixed": true,
+  "event_date_source": null,
+  "event_time_text": null
+}, {
+  "event_date_id": 655,
+  "event_date_timestamp": "2006-11-23T00:00:00Z",
+  "event_date_text": "11/23/2006",
+  "event_date_description": "Thanksgiving Day - Federal Holiday",
+  "event_id": 9,
+  "fixed": true,
+  "event_date_source": null,
+  "event_time_text": null
+}, {
+  "event_date_id": 654,
+  "event_date_timestamp": "2005-11-24T00:00:00Z",
+  "event_date_text": "11/24/2005",
+  "event_date_description": "Thanksgiving Day - Federal Holiday",
+  "event_id": 9,
+  "fixed": true,
+  "event_date_source": null,
+  "event_time_text": null
+}, {
+  "event_date_id": 653,
+  "event_date_timestamp": "2004-11-25T00:00:00Z",
+  "event_date_text": "11/25/2004",
+  "event_date_description": "Thanksgiving Day - Federal Holiday",
+  "event_id": 9,
+  "fixed": true,
+  "event_date_source": null,
+  "event_time_text": null
+}, {
+  "event_date_id": 652,
+  "event_date_timestamp": "2003-11-27T00:00:00Z",
+  "event_date_text": "11/27/2003",
+  "event_date_description": "Thanksgiving Day - Federal Holiday",
+  "event_id": 9,
+  "fixed": true,
+  "event_date_source": null,
+  "event_time_text": null
+}, {
+  "event_date_id": 651,
+  "event_date_timestamp": "2002-11-28T00:00:00Z",
+  "event_date_text": "11/28/2002",
+  "event_date_description": "Thanksgiving Day - Federal Holiday",
+  "event_id": 9,
+  "fixed": true,
+  "event_date_source": null,
+  "event_time_text": null
+}, {
+  "event_date_id": 650,
+  "event_date_timestamp": "2001-11-22T00:00:00Z",
+  "event_date_text": "11/22/2001",
+  "event_date_description": "Thanksgiving Day - Federal Holiday",
+  "event_id": 9,
+  "fixed": true,
+  "event_date_source": null,
+  "event_time_text": null
+}, {
+  "event_date_id": 649,
+  "event_date_timestamp": "2000-11-23T00:00:00Z",
+  "event_date_text": "11/23/2000",
+  "event_date_description": "Thanksgiving Day - Federal Holiday",
+  "event_id": 9,
+  "fixed": true,
+  "event_date_source": null,
+  "event_time_text": null
+}]

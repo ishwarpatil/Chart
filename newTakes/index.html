@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>dc.js - Dimensional Charting Javascript Library</title>
+
+    <meta charset="UTF-8">
+
+    <!-- HighChart Js/Css Files Start-->
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <!--<link rel="stylesheet" href="/resources/demos/style.css">-->
+
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <script src="https://code.highcharts.com/stock/highstock.js"></script>
+    <script src="https://code.highcharts.com/stock/modules/drag-panes.js"></script>
+    <script src="https://code.highcharts.com/stock/modules/exporting.js"></script>
+    <!-- HighChart Js/Css Files End-->
+
+
+    <!-- D3 Js/Css Files Start-->
+    <!--<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">-->
+    <link rel="stylesheet" type="text/css" href="css/dc.css"/>
+    <style>
+        #monthly-volume-chart g.y {
+            display: none;
+        }
+        #logo {
+            margin-right: 2em;
+            margin-top: 2em;
+        }
+    </style>
+    <!-- D3 Js/Css Files End-->
+
+</head>
+<div class="container">
+<div class="col-md-2">
+    <div class="form-group">
+        <label for="symbol" class="control-label">Symbol 1</label>
+        <input type="text" id="tags" placeholder="" list="symbol-list" id="symbol" class="form-control">
+        <label class="message-label"></label>
+        <datalist id="symbol-list">
+        </datalist>
+    </div>
+    <button class="btn-info" onclick="getSymbol()">Analyze</button>
+</div>
+</div>
+<br>
+<br>
+<br>
+<div class="container">
+<div class="row" style="display: none;">
+    <div id="yearly-bubble-chart" class="dc-chart">
+        <strong>Yearly Performance</strong> (radius: fluctuation/index ratio, color: gain/loss)
+        <a class="reset" href="javascript:yearlyBubbleChart.filterAll();dc.redrawAll();"
+           style="display: none;">reset</a>
+
+        <div class="clearfix"></div>
+    </div>
+</div>
+
+<div class="row">
+    <div id="gain-loss-chart">
+        <strong>Days by Gain/Loss</strong>
+        <a class="reset" href="javascript:gainOrLossChart.filterAll();dc.redrawAll();" style="display: none;">reset</a>
+
+        <div class="clearfix"></div>
+    </div>
+
+    <div id="day-of-week-chart">
+        <strong>Day of Week</strong>
+        <a class="reset" href="javascript:dayOfWeekChart.filterAll();dc.redrawAll();" style="display: none;">reset</a>
+
+        <div class="clearfix"></div>
+    </div>
+
+    <div id="quarter-chart">
+        <strong>Quarters</strong>
+        <a class="reset" href="javascript:quarterChart.filterAll();dc.redrawAll();" style="display: none;">reset</a>
+
+        <div class="clearfix"></div>
+    </div>
+
+    <div id="fluctuation-chart">
+        <strong>Days by Fluctuation(%)</strong>
+        <span class="reset" style="display: none;">range: <span class="filter"></span></span>
+        <a class="reset" href="javascript:fluctuationChart.filterAll();dc.redrawAll();" style="display: none;">reset</a>
+
+        <div class="clearfix"></div>
+    </div>
+</div>
+
+
+<div class="row">
+    <div>
+        <div class="dc-data-count">
+            <span class="filter-count"></span> selected out of <span class="total-count"></span> records | <a
+                href="javascript:dc.filterAll(); dc.renderAll();">Reset All</a>
+        </div>
+    </div>
+    <table class="table table-hover dc-data-table">
+    </table>
+</div>
+
+<div class="clearfix"></div>
+
+
+</div>
+
+<script type="text/javascript" src="js/d3.js"></script>
+<script type="text/javascript" src="js/crossfilter.js"></script>
+<script type="text/javascript" src="js/dc.js"></script>
+<script type="text/javascript" src="js/colorbrewer.js"></script>
+<script type="text/javascript" src="stock.js"></script>
+
+</body>
+</html>

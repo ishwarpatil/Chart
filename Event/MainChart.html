@@ -1,0 +1,205 @@
+<html>
+<head>
+
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <!--<link rel="stylesheet" href="/resources/demos/style.css">-->
+
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <script src="https://code.highcharts.com/stock/highstock.js"></script>
+    <script src="https://code.highcharts.com/stock/modules/drag-panes.js"></script>
+    <script src="https://code.highcharts.com/stock/modules/exporting.js"></script>
+
+    <script>
+
+      let html = "";
+      let urlSybmol = 'http://data.accrue.com/api/data/symbols?auth-token=Sy1zihufJ2cOeLMSKrkKsvZF_QRjS4XWG2rg4dO7veM&q=micro';
+      $.getJSON(urlSybmol, (data) => {
+        $.each(data, (k, v) => {
+          let symbol = v.symbol;
+          let description = v.description;
+          let exchange = v.exchange;
+          //availableTags.push(symbol);
+          html += "<option value=" + symbol + ">" + symbol + " - " + description + " - " + exchange + "</option>";
+        });
+        document.getElementById('symbol-list').innerHTML += html;
+      });
+
+      let getSymbol = () => {
+        let plot = [];
+        let flag = [];
+        let symbol = document.getElementById("tags").value;
+        let url = 'http://db.accrue.com/api/data/history?auth-token=Sy1zihufJ2cOeLMSKrkKsvZF_QRjS4XWG2rg4dO7veM&symbol=' + symbol + '&type=daily';
+
+        $.ajax({
+          url : 'event.json',
+          dataType : 'json',
+          async : false,
+          success : function (data)
+          {
+            $.each(data, (k, v) => {
+
+              var date = v.event_date_text;
+              var month = date.substring(0, 2);
+              var day = date.substring(3, 5);
+              var year = date.substring(6, 10);
+              plot.push({
+                color: 'red',
+                width: 2,
+                value: Date.UTC(year, month, day)
+              });
+              flag.push({
+                x: Date.UTC(year, month, day),
+                title: 'Events',
+                text: 'Events Dates'
+              });
+            });
+          }
+        });
+
+          $.getJSON(url, (data) => {
+
+            let ohlc = [];
+            let volume = [];
+
+            groupingUnits = [[
+              'week',                         // unit name
+              [1]                             // allowed multiples
+            ], [
+              'month',
+              [1, 2, 3, 4, 6]
+            ]],
+
+              $.each(data.data, (k, v) => {
+
+                let date = v.time;
+                let unixDate = new Date(date);
+                let unixTimestamp = unixDate.getTime();
+                let open = v.open;
+                let high = v.high;
+                let low = v.low;
+                let close = v.close;
+                let volumes = v.volume;
+
+                //ohlc data
+                ohlc.push([
+                  unixTimestamp, // the date
+                  open, // open
+                  high, // high
+                  low, // low
+                  close // close
+                ]);
+
+                //volume data
+                volume.push([
+                  unixTimestamp, // the date
+                  volumes, // the volume
+                ]);
+
+              });
+
+            // create the chart
+            Highcharts.stockChart('container', {
+
+              rangeSelector: {
+                selected: 1
+              },
+
+              title: {
+                text: symbol + ' Historical'
+              },
+
+              xAxis: {
+                plotLines: plot
+              },
+
+              yAxis: [{
+                //Set OHLC
+                labels: {
+                  align: 'right',
+                  x: -3
+                },
+                title: {
+                  text: 'OHLC'
+                },
+                height: '60%',
+                lineWidth: 2,
+                resize: {
+                  enabled: true
+                }
+              }, {
+                //Set Volume
+                labels: {
+                  align: 'right',
+                  x: -3
+                },
+                title: {
+                  text: 'Volume'
+                },
+                top: '65%',
+                height: '35%',
+                offset: 0,
+                lineWidth: 2
+              }],
+
+              tooltip: {
+                split: true
+              },
+
+              series: [
+                {
+                  type: 'candlestick',
+                  name: symbol,
+                  //color: '#0066FF',
+                  data: ohlc,
+                  dataGrouping: {
+                    units: groupingUnits
+                  }
+                },
+                {
+                  type: 'column',
+                  name: 'Volume',
+                  //color: '#FF0000',
+                  data: volume,
+                  yAxis: 1,
+                  dataGrouping: {
+                    units: groupingUnits
+                  }
+                },
+                {
+                  type: 'flags',
+                  data: flag,
+                  onSeries: 'dataseries',
+                  shape: 'circlepin',
+                  width: 50,
+                  y : -180
+                }],
+            });
+          });
+      }
+
+    </script>
+
+</head>
+<div class="col-md-2">
+    <div class="form-group">
+        <label for="symbol" class="control-label">Symbol 1</label>
+        <input type="text" id="tags" placeholder="" list="symbol-list" id="symbol" class="form-control">
+        <label class="message-label"></label>
+        <datalist id="symbol-list">
+        </datalist>
+    </div>
+    <button class="btn-info" onclick="getSymbol()">Analyze</button>
+</div>
+<br>
+<br>
+<div id="container" style="height: 400px; min-width: 310px"></div>
+</body>
+</html>
